@@ -1,0 +1,6 @@
+# Copyright 2019, Cray Inc. All Rights Reserved.
+---
+# defaults file for ca-cert
+
+ca_cert_file: /etc/cray/ca/certificate_authority.crt 
+ca_cert_dest_dir: /usr/share/pki/trust/anchors/

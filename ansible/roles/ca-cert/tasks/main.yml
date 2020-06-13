@@ -1,0 +1,13 @@
+# Copyright 2019, Cray Inc. All Rights Reserved.
+---
+# Install a Cray CA certificate onto a SLES system.
+
+- name: Copy CA certificate to the canonical location
+  copy:
+    src: "{{ ca_cert_file }}"
+    dest: "{{ ca_cert_dest_dir }}"
+    remote_src: yes
+
+- name: Update the certificate
+  command: update-ca-certificates
+    
