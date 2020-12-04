@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+# Copyright 2019, Cray Inc. All Rights Reserved.
+---
+- hosts: computes
+  any_errors_fatal: true
+  remote_user: root
+  roles:
+    - { role: ca-cert }
+
