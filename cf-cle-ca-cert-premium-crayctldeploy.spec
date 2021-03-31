@@ -1,6 +1,6 @@
-# Copyright 2020 HPED LP
+# Copyright 2020-2021 Hewlett Packard Enterprise Development LP
 Name: cf-ca-cert
-License: Cray Software License Agreement
+License: MIT
 Summary: Cray Configuration Framework CA Cert Ansible Role
 Group: System/Management
 Version: %(cat .rpm_version)
