@@ -37,7 +37,7 @@ pipeline {
         stage('Publish ') {
             steps {
                 script {
-                    publishCsmRpms(component: "cf-ca-cert", pattern: "dist/rpmbuild/RPMS/noarch/*.rpm", arch: "noarch", isStable: env.IS_STABLE)
+                    publishCsmRpms(component: "cf-ca-cert", pattern: "dist/rpmbuild/RPMS/x86_64/*.rpm", arch: "x86_64", isStable: env.IS_STABLE)
                     publishCsmRpms(component: "cf-ca-cert", pattern: "dist/rpmbuild/SRPMS/*.rpm", arch: "src", isStable: env.IS_STABLE)
                 }
             }
