@@ -11,8 +11,10 @@ pipeline {
     }
 
     environment {
+        NAME = "cf-ca-cert-config-framework"
         SPEC_FILE = "cf-ca-cert.spec"
-        IS_STABLE = getBuildIsStable()
+        VERSION = sh(returnStdout: true, script: "head -1 .version").trim()
+        IS_STABLE = getBuildIsStable(releaseBranchIsStable: true)
         BUILD_METADATA = getRpmRevision(isStable: env.IS_STABLE)
     }
 
@@ -37,8 +39,8 @@ pipeline {
         stage('Publish ') {
             steps {
                 script {
-                    publishCsmRpms(component: "cf-ca-cert", pattern: "dist/rpmbuild/RPMS/x86_64/*.rpm", arch: "x86_64", isStable: env.IS_STABLE)
-                    publishCsmRpms(component: "cf-ca-cert", pattern: "dist/rpmbuild/SRPMS/*.rpm", arch: "src", isStable: env.IS_STABLE)
+                    publishCsmRpms(component: env.NAME, pattern: "dist/rpmbuild/RPMS/x86_64/*.rpm", arch: "x86_64", isStable: env.IS_STABLE)
+                    publishCsmRpms(component: env.NAME, pattern: "dist/rpmbuild/SRPMS/*.rpm", arch: "src", isStable: env.IS_STABLE)
                 }
             }
         }
