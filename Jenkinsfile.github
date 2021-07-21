@@ -14,7 +14,7 @@ pipeline {
         NAME = "cf-ca-cert-config-framework"
         SPEC_FILE = "cf-ca-cert.spec"
         VERSION = sh(returnStdout: true, script: "head -1 .version").trim()
-        IS_STABLE = getBuildIsStable(releaseBranchIsStable: true)
+        IS_STABLE = getBuildIsStable()
         BUILD_METADATA = getRpmRevision(isStable: env.IS_STABLE)
     }
 
