@@ -12,36 +12,44 @@ pipeline {
 
     environment {
         NAME = "cf-ca-cert-config-framework"
-        SPEC_FILE = "cf-ca-cert.spec"
-        VERSION = sh(returnStdout: true, script: "head -1 .version").trim()
         IS_STABLE = getBuildIsStable()
-        BUILD_METADATA = getRpmRevision(isStable: env.IS_STABLE)
+        RPM_VERSION = sh(returnStdout: true, script: "head -1 .version").trim()
     }
 
     stages {
+        stage("Lint") {
+            steps {
+                sh "make lint"
+            }
+        }
+        
+        stage("Add RPM Metadata") {
+            environment {
+                BUILD_METADATA = getRpmRevision(isStable: env.IS_STABLE)
+            }
+            
+            steps {
+                echo "RPM build metadata is ${env.BUILD_METADATA}"
+                runLibraryScript("addRpmMetaData.sh", "")
+            }
+        }
+
         stage("Prepare") {
             steps {
-                script {
-                    runLibraryScript("addRpmMetaData.sh", env.SPEC_FILE)
-                    sh "make prepare"
-                }
+                sh "make prepare"
             }
         }
 
         stage("Build RPM") {
             steps {
-                script {
-                    sh "make rpm"
-                }
+                sh "make rpm"
             }
         }
 
         stage('Publish ') {
             steps {
-                script {
-                    publishCsmRpms(component: env.NAME, pattern: "dist/rpmbuild/RPMS/x86_64/*.rpm", arch: "x86_64", isStable: env.IS_STABLE)
-                    publishCsmRpms(component: env.NAME, pattern: "dist/rpmbuild/SRPMS/*.rpm", arch: "src", isStable: env.IS_STABLE)
-                }
+                publishCsmRpms(component: env.NAME, pattern: "dist/rpmbuild/RPMS/x86_64/*.rpm", arch: "x86_64", isStable: env.IS_STABLE)
+                publishCsmRpms(component: env.NAME, pattern: "dist/rpmbuild/SRPMS/*.rpm", arch: "src", isStable: env.IS_STABLE)
             }
         }
     }

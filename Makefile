@@ -22,22 +22,24 @@
 
 NAME ?= cf-ca-cert-config-framework
 
-VERSION ?= $(shell cat .version)
+RPM_VERSION ?= $(shell head -1 .version)
 
 # Default release if not set
 BUILD_METADATA ?= "1~development~$(shell git rev-parse --short HEAD)"
 
 SPEC_FILE ?= cf-ca-cert.spec
-source_name := ${NAME}-${VERSION}
+source_name := ${NAME}-${RPM_VERSION}
 
 build_dir := $(PWD)/dist/rpmbuild
 source_path := ${build_dir}/SOURCES/${source_name}.tar.bz2
 
-all : prepare rpm
+all : lint prepare rpm
 rpm: rpm_package_source rpm_build_source rpm_build
 
-prepare:
+lint:
 		./runLint.sh
+
+prepare:
 		rm -rf dist
 		mkdir -p $(build_dir)/SPECS $(build_dir)/SOURCES
 		cp $(SPEC_FILE) $(build_dir)/SPECS/
