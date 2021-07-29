@@ -33,11 +33,19 @@ source_name := ${NAME}-${RPM_VERSION}
 build_dir := $(PWD)/dist/rpmbuild
 source_path := ${build_dir}/SOURCES/${source_name}.tar.bz2
 
-all : lint prepare rpm
+all : clone_cms_meta_tools runbuildprep lint prepare rpm
 rpm: rpm_package_source rpm_build_source rpm_build
 
+# If you wish to perform a local build, you will need to clone or copy the contents of the
+# cms_meta_tools repo to ./cms_meta_tools
+clone_cms_meta_tools:
+		git clone --depth 1 --no-single-branch https://github.com/Cray-HPE/cms-meta-tools.git ./cms_meta_tools
+
+runbuildprep:
+		./cms_meta_tools/scripts/runBuildPrep.sh
+
 lint:
-		./runLint.sh
+		./cms_meta_tools/scripts/runLint.sh
 
 prepare:
 		rm -rf dist
@@ -45,7 +53,7 @@ prepare:
 		cp $(SPEC_FILE) $(build_dir)/SPECS/
 
 rpm_package_source:
-		tar --transform 'flags=r;s,^,/$(source_name)/,' --exclude .git --exclude dist -cvjf $(source_path) .
+		tar --transform 'flags=r;s,^,/$(source_name)/,' --exclude .git --exclude ./dist --exclude ./cms_meta_tools -cvjf $(source_path) .
 
 rpm_build_source:
 		BUILD_METADATA=$(BUILD_METADATA) rpmbuild -ts $(source_path) --define "_topdir $(build_dir)"
