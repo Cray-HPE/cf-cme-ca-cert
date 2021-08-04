@@ -20,8 +20,10 @@
 #
 # (MIT License)
 
-NAME ?= cf-ca-cert-config-framework
+# If you wish to perform a local build, you will need to clone or copy the contents of the
+# cms-meta-tools repo to ./cms_meta_tools
 
+NAME ?= cf-ca-cert-config-framework
 RPM_VERSION ?= $(shell head -1 .version)
 
 # Default release if not set
@@ -33,13 +35,8 @@ source_name := ${NAME}-${RPM_VERSION}
 build_dir := $(PWD)/dist/rpmbuild
 source_path := ${build_dir}/SOURCES/${source_name}.tar.bz2
 
-all : clone_cms_meta_tools runbuildprep lint prepare rpm
+all : runbuildprep lint prepare rpm
 rpm: rpm_package_source rpm_build_source rpm_build
-
-# If you wish to perform a local build, you will need to clone or copy the contents of the
-# cms_meta_tools repo to ./cms_meta_tools
-clone_cms_meta_tools:
-		git clone --depth 1 --no-single-branch https://github.com/Cray-HPE/cms-meta-tools.git ./cms_meta_tools
 
 runbuildprep:
 		./cms_meta_tools/scripts/runBuildPrep.sh
