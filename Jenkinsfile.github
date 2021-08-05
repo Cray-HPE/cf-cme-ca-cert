@@ -14,6 +14,7 @@ pipeline {
         NAME = "cf-ca-cert-config-framework"
         IS_STABLE = getBuildIsStable()
         RPM_VERSION = sh(returnStdout: true, script: "head -1 .version").trim()
+        BUILD_METADATA = getRpmRevision(isStable: env.IS_STABLE)
     }
 
     stages {
@@ -35,13 +36,9 @@ pipeline {
             steps {
                 sh "make lint"
             }
-        }        
+        }
 
         stage("Add RPM Metadata") {
-            environment {
-                BUILD_METADATA = getRpmRevision(isStable: env.IS_STABLE)
-            }
-            
             steps {
                 echo "RPM build metadata is ${env.BUILD_METADATA}"
                 runLibraryScript("addRpmMetaData.sh", "")
