@@ -28,6 +28,18 @@
     dest: "{{ ca_cert_dest_dir }}"
     remote_src: yes
 
-- name: Update the certificate
-  command: update-ca-certificates
+# NOTE: update-ca-certificates distributed in SLES 15 SP3 doesn't work
+# in a chrooted environment. Instead, run the scripts directly.
+- name: Find certificate update scripts
+  find:
+    paths:
+    - /etc/ca-certificates/update.d
+    - /usr/lib/ca-certificates/update.d
+    patterns:
+    - '*.run'
+  register: ca_scripts
+
+- name: Run certificate update scripts
+  command: "{{ item.path }}"
+  loop: "{{ ca_scripts.files }}"
     
