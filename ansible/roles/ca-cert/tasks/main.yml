@@ -28,14 +28,15 @@
     dest: "{{ ca_cert_dest_dir }}"
     remote_src: yes
 
+# NOTE: Only run this in SLES 15 SP2, since the version in SLES 15 SP3
+# doesn't work in a chrooted environment.
 - name: Update the certificate
   command: update-ca-certificates
   when: >
     ansible_distribution == "SLES" and
-    ansible_distribution_version != "15.3"
+    ansible_distribution_version == "15.2"
 
-# NOTE: update-ca-certificates distributed in SLES 15 SP3 doesn't work
-# in a chrooted environment. Instead, run the scripts directly.
+# In SLES 15 SP3, run the certificate update scripts directly
 - name: Find certificate update scripts
   find:
     paths:
