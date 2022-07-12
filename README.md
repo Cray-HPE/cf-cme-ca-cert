@@ -27,6 +27,11 @@ For helm charts, a few annotation metadata fields are appended which contain sim
 
 For RPMs, a changelog entry is added with similar information.
 
+## Changelog
+
+See the [CHANGELOG](CHANGELOG.md) for changes. This file uses the [Keep A Changelog](https://keepachangelog.com)
+format.
+
 ### Copyright and License
 This project is copyrighted by Hewlett Packard Enterprise Development LP and is under the MIT
 license. See the [LICENSE](LICENSE) file for details.
