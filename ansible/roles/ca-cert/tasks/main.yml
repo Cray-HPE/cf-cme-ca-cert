@@ -38,7 +38,7 @@
     ansible_distribution == "SLES" and
     ansible_distribution_version == "15.2"
 
-# In SLES 15 SP3, run the certificate update scripts directly
+# In SLES 15 SP3/SP4, run the certificate update scripts directly
 - name: Find certificate update scripts
   find:
     paths:
@@ -49,7 +49,7 @@
   register: ca_scripts
   when: >
     ansible_distribution == "SLES" and
-    ansible_distribution_version == "15.3"
+    ansible_distribution_version != "15.2"
 
 
 - name: Run certificate update scripts
@@ -57,5 +57,4 @@
   loop: "{{ ca_scripts.files }}"
   when: >
     ansible_distribution == "SLES" and
-    ansible_distribution_version == "15.3"
-    
+    ansible_distribution_version != "15.2"
