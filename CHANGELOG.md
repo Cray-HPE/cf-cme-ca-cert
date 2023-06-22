@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [2.5.2] - 2023-06-22
+### Added
+- Build SLES SP5 RPM
 ### Removed
 - Removed defunct files leftover from previous versioning system
 
