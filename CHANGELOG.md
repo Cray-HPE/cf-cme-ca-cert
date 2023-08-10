@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Disabled concurrent Jenkins builds on same branch/commit
 - Added build timeout to avoid hung builds
+- RPM OS type changed to `noos`.
 
 ## [2.6.0] - 2023-06-22
 ### Added
