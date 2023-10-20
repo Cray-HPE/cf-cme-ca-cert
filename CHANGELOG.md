@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Dependencies
+- Bump `tj-actions/changed-files` from 37 to 39 ([#30](https://github.com/Cray-HPE/cf-cme-ca-cert/pull/30))
+
 ## [2.6.1] - 2023-08-10
 ### Changed
 - Disabled concurrent Jenkins builds on same branch/commit
