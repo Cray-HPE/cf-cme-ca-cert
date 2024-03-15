@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Dependencies
+- Bump `tj-actions/changed-files` from 42 to 43 ([#38](https://github.com/Cray-HPE/cf-cme-ca-cert/pull/38))
+
 ## [2.7.0] - 2024-02-23
 ### Dependencies
 - Bump `tj-actions/changed-files` from 37 to 42 ([#30](https://github.com/Cray-HPE/cf-cme-ca-cert/pull/30), [#32](https://github.com/Cray-HPE/cf-cme-ca-cert/pull/32), [#33](https://github.com/Cray-HPE/cf-cme-ca-cert/pull/33), [#35](https://github.com/Cray-HPE/cf-cme-ca-cert/pull/35))
