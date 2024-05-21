@@ -1,7 +1,7 @@
 #
 # MIT License
 #
-# (C) Copyright 2019,2021-2022 Hewlett Packard Enterprise Development LP
+# (C) Copyright 2019,2021-2024 Hewlett Packard Enterprise Development LP
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -51,9 +51,10 @@
     ansible_distribution == "SLES" and
     ansible_distribution_version != "15.2"
 
-
 - name: Run certificate update scripts
   command: "{{ item.path }}"
+  environment:
+    statedir: "/var/lib/ca-certificates"
   loop: "{{ ca_scripts.files }}"
   when: >
     ansible_distribution == "SLES" and
