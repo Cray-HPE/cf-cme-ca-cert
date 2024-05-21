@@ -7,8 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.1] - 2024-05-21
 ### Added
-- 'statedir' environment variable to support a newer version of the ca-certificates rpm
+- 'statedir' environment variable to support a newer version of the `ca-certificates` RPM
 
 ### Dependencies
 - Bump `tj-actions/changed-files` from 42 to 44 ([#38](https://github.com/Cray-HPE/cf-cme-ca-cert/pull/38), [#39](https://github.com/Cray-HPE/cf-cme-ca-cert/pull/39))
