@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Dependencies
 - Bump `tj-actions/changed-files` from 44 to 45 ([#43](https://github.com/Cray-HPE/cf-cme-ca-cert/pull/43))
 - Bump `dangoslen/dependabot-changelog-helper` from 3 to 4 ([#44](https://github.com/Cray-HPE/cf-cme-ca-cert/pull/44))
+- Bump `actions/checkout` from 4 to 5 ([#47](https://github.com/Cray-HPE/cf-cme-ca-cert/pull/47))
 
 ## [2.7.1] - 2024-05-21
 ### Added
